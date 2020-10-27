@@ -261,3 +261,48 @@ Gives us all the functional features like any other programming languages
       height: 80px;
       width: 80px;
     }
+
+
+### for 
+
+    @for $i from 1 through 3 {
+      ul:nth-child(3n + #{$i}) {
+        background-color: lighten($base-color, $i * 5%);
+      }
+    }
+
+*OUTPUT*
+
+    ul:nth-child(3n + 1) {
+      background-color: #004080;
+    }
+
+    ul:nth-child(3n + 2) {
+      background-color: #004d99;
+    }
+
+    ul:nth-child(3n + 3) {
+      background-color: #0059b3;
+    }
+
+
+### while 
+
+    /// Divides `$value` by `$ratio` until it's below `$base`.
+    @function scale-below($value, $base, $ratio: 1.618) {
+      @while $value > $base {
+        $value: $value / $ratio;
+      }
+      @return $value;
+    }
+
+    $normal-font-size: 16px;
+    sup {
+      font-size: scale-below(20px, 16px);
+    }
+
+*OUTPUT*
+
+    sup {
+      font-size: 12.36094px;
+    }
