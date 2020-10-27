@@ -140,3 +140,26 @@ Gives us all the functional features like any other programming languages
       float: left;
       margin-left: 64px;
     }
+
+
+### Inheritance using extends
+
+    .error {
+      border: 1px #f00;
+      background-color: #fdd;
+
+      &--serious {
+        @extend .error;
+        border-width: 3px;
+      }
+    }
+
+*OUTPUT*
+
+    .error, .error--serious {
+      border: 1px #f00;
+      background-color: #fdd;
+    }
+    .error--serious {
+      border-width: 3px;
+    }
