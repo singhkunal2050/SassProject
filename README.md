@@ -59,8 +59,84 @@
 
 <br>
 
+### Modules 
+
+#### We can Reuse SASS Components and MOdules in our filess by importing
+
+    use "sass:color";
+    .button {
+      $primary-color: #6b717f;
+      color: $primary-color;
+      border: 1px solid color.scale($primary-color, $lightness: 20%);
+    }
+
+**POST COMPILATION**
+
+    .button {
+      color: #6b717f;
+      border: 1px solid #878d9a;
+    }
 
 
+### Mixins and Functions 
+Gives us all the functional features like any other programming languages
+
+**Mixins** 
+
+    @mixin reset-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    @mixin horizontal-list {
+      @include reset-list;
+
+      li {
+        display: inline-block;
+        margin: {
+          left: -2px;
+          right: 2em;
+        }
+      }
+    }
+
+    nav ul {
+      @include horizontal-list;
+    }
+
+*OUTPUT*
+
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    nav ul li {
+      display: inline-block;
+      margin-left: -2px;
+      margin-right: 2em;
+    }
 
 
+**FUNCTIONS**
 
+    @function pow($base, $exponent) {
+      $result: 1;
+      @for $_ from 1 through $exponent {
+        $result: $result * $base;
+      }
+      @return $result;
+    }
+
+    .sidebar {
+      float: left;
+      margin-left: pow(4, 3) * 1px;
+    }
+
+*OUTPUT*
+
+    .sidebar {
+      float: left;
+      margin-left: 64px;
+    }
