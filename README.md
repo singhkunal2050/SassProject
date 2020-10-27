@@ -163,3 +163,101 @@ Gives us all the functional features like any other programming languages
     .error--serious {
       border-width: 3px;
     }
+
+
+### Operators 
+
+**Sass has a pretty standard order of operations, from tightest to loosest:**
+
+- The unary operators not, +, -, and /.
+- The *, /, and % operators.
+- The + and - operators.
+- The >, >=, < and <= operators.
+- The == and != operators.
+- The and operator.
+- The or operator.
+- The = operator, when it’s available.
+
+
+
+### FLOW CONTROL
+
+- @if controls whether or not a block is evaluated.
+
+- @each evaluates a block for each element in a list or each pair in a map.
+
+- @for evaluates a block a certain number of times.
+
+- @while evaluates a block until a certain condition is met.
+
+
+**if**
+
+    @mixin triangle($size, $color, $direction) {
+      height: 0;
+      width: 0;
+
+      border-color: transparent;
+      border-style: solid;
+      border-width: $size / 2;
+
+      @if $direction == up {
+        border-bottom-color: $color;
+      } @else if $direction == right {
+        border-left-color: $color;
+      } @else if $direction == down {
+        border-top-color: $color;
+      } @else if $direction == left {
+        border-right-color: $color;
+      } @else {
+        @error "Unknown direction #{$direction}.";
+      }
+    }
+
+    .next {
+      @include triangle(5px, black, right);
+    }
+
+*OUTPUT*
+
+    .next {
+      height: 0;
+      width: 0;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 2.5px;
+      border-left-color: black;
+    }
+
+
+**each**
+
+    $sizes: 40px, 50px, 80px;
+
+    @each $size in $sizes {
+      .icon-#{$size} {
+        font-size: $size;
+        height: $size;
+        width: $size;
+      }
+    }
+
+*OUTPUT*
+
+    .icon-40px {
+      font-size: 40px;
+      height: 40px;
+      width: 40px;
+    }
+
+    .icon-50px {
+      font-size: 50px;
+      height: 50px;
+      width: 50px;
+    }
+
+    .icon-80px {
+      font-size: 80px;
+      height: 80px;
+      width: 80px;
+    }
